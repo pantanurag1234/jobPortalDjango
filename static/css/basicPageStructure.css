@@ -1,0 +1,34 @@
+.bg-img{
+    /* background-image: url("../images/bgimg.jpg"); */
+    background-image: url("https://source.unsplash.com/1600x900/?office,Recruitment,team");
+    /* background-image: url(" /static/ C:/Web Dev/Django/JobPortalDjango/static/images/main_page.jpg"); */
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    /* opacity: 0.5; */
+    /* filter: blur(8px); */
+    background-repeat: repeat-y;
+}
+
+.myNav{
+    background-color:rgb(34, 172, 34);
+    font-weight: 900;
+    z-index: 1;
+    border-bottom: 5px solid aquamarine;
+}
+
+.formCSS{
+    margin-top: 238px;
+    width: 40%;
+    margin-left: 43%;
+    color: aquamarine;
+    opacity: 0.8;
+    font-weight:1000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#navLogo{
+    height: 40px;
+    margin-right: 10px;
+}

@@ -1,0 +1,41 @@
+{% extends 'mainTemplates/basicPageStructure.html' %}
+{% load static %}
+
+{% block head %} 
+
+<title>Login Page</title>
+<link rel="stylesheet" href="{% static '/css/login.css' %}">
+
+{% endblock %}
+
+
+{% block content %} 
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+          {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+<form name="login" method="POST" action="/login/" class="formCSS">
+  {% csrf_token %}
+  <h1>Login Now!</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 36%">
+      <div id="emailHelp" class="form-text" style="color:black;">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" style="width: 36%">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="color: black; background-color: burlywood;">Submit</button><br>
+    <a href="http://127.0.0.1:8000/register/">Don't have account? Register here.</a>
+  </form>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'mainTemplates/basicPageStructure.html' %}
+{% load static %}
+
+{% block head %}
+
+<title>Landing Page</title>
+<link rel="stylesheet" href="register.css">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div id="form">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form class="formCSS" name="register" method="post" action="/register/">
+        {% csrf_token %}
+        <!-- <div class="mb-3">
+            <label for="exampleInputName1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+        </div> -->
+        <!-- --------------------------------------------------------- -->
+        <!-- <div >{{ reg_Form.name.label }}</div>
+        <div>{{ reg_Form.name }}</div>
+        
+        <div>{{ reg_Form.email.label }}</div>
+        <div>{{ reg_Form.email}}</div>
+        <div>{{ reg_Form.password.label }}</div>
+        <div>{{ reg_Form.password }}</div>
+        <div>{{ reg_Form.confirm_password.label }}</div>
+        <div>{{ reg_Form.confirm_password }}</div> -->
+        <!-- --------------------------------------------------------- -->
+        <h1>Register Here!</h1>
+        <label>Username:</label><br>
+        <input type="text" name="username"><br>
+        <label>Email:</label><br>
+        <input type="email" name="email"><br>
+        <label>Password:</label><br>
+        <input type="password" name="password"><br>
+        <label>Confirm Password:</label><br>
+        <input type="password" name="confirm_password"><br>
+
+        <button type="submit" class="btn btn-primary my-3" style="color: black; background-color: burlywood;">Submit</button><br>
+        <a href="http://127.0.0.1:8000/login/">Already registered? Login here.</a>
+    </form>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'mainTemplates/basicPageStructure.html' %}
+{% load static %}
+
+{% block head %}
+
+<title>Landing Page</title>
+<link rel="stylesheet" href="{% static '/css/landing.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- <center> -->
+<form name="landing" method="POST" action="/landing/" class="formCSS">
+    {% csrf_token %}
+    <!-- <pre> -->
+    <!-- <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Organisation name*</label>
+        <input type="text" name="orgName" class="form-control" id="exampleInputName" aria-describedby="emailHelp" required> -->
+        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+    <!-- </div>
+    <div class="mb-3">
+        <label for="exampleInputPosition" class="form-label">Hiring for position</label>
+        <input type="text" name="orgPosition" class="form-control" id="exampleInputPosition"
+            aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPackage" class="form-label">Package offered (in LPA)*</label>
+        <input type="number" name="orgPackage" class="form-control" id="exampleInputPackage"
+            aria-describedby="emailHelp" required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputExperience" class="form-label">Experience (in years)</label>
+        <input type="number" name="orgExperience" class="form-control" id="exampleInputExperience"
+            aria-describedby="emailHelp">
+    </div> -->
+    <div>{{ orgForm.name.label }}</div>
+    <div>{{ orgForm.name }}</div>
+    <div>{{ orgForm.position.label }}</div>
+    <div>{{ orgForm.position}}</div>
+    <div>{{ orgForm.package_in_LPA.label }}</div>
+    <div>{{ orgForm.package_in_LPA }}</div>
+    <div>{{ orgForm.experience_in_yrs.label }}</div>
+    <div>{{ orgForm.experience_in_yrs }}</div>
+
+    <button type="submit" class="btn btn-primary my-3" style="color: black; background-color:burlywood;">Post Job</button>
+    <!-- </pre> -->
+</form>
+<!-- </center> -->
+
+<table class="table table-dark table-hover landingTable landing-table">
+    <thead>
+        <tr>
+            <th scope="col">Token</th>
+            <th scope="col">OrgName</th>
+            <th scope="col">Position</th>
+            <th scope="col">Package(in LPA)</th>
+            <th scope="col">Experience(in Yrs)</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {% for org in organisationsTableData %}
+        <tr>
+            <th scope="row">{{ org.id }}</th>
+            <td>{{ org.name }}</td>
+            <td>{{ org.position }}</td>
+            <td>{{ org.package_in_LPA }}</td>
+            <td>{{ org.experience_in_yrs }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- {{ organisationsTableData }} -->
+<!-- <ul>
+{% for org in organisationsTableData %}
+    <li>{{ org.package_in_LPA }}</li>
+{% endfor %}
+</ul> -->
+
+{% endblock %}

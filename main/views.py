@@ -1,8 +1,9 @@
 from django.shortcuts import render
 
 #by me
+from django.shortcuts import redirect
 from django.http import HttpResponse 
-from .models import organisations, registration
+from .models import organisations,registration
 from .form import landingForm
 from django.shortcuts import *
 # from django.contrib.auth.forms import UserCreationForm
@@ -14,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 def empty(request):
     return render(request, 'mainTemplates/pages/empty.html')
 
-def login(request):
+def custom_login_view(request):
     # return HttpResponse('Login Page')
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -26,16 +27,16 @@ def login(request):
 
             login(request, user)
 
-            return redirect("/landing/")
+            return redirect("/landing")
 
         else:
             messages.info(request, 'Invalid Credential!!')
-            return redirect("login")
+            return redirect("/login")
 
     else:
         return render(request, 'mainTemplates/pages/login.html')
 
-def register(request):
+def custom_register_view(request):
     # ----------------------------------------------------------------------
     # # return HttpResponse('Register Page')
     # reg_Form = regForm()
@@ -62,17 +63,17 @@ def register(request):
         # Check if the passwords match
         if varPassword != varConfirm_password:
             messages.error(request, 'Passwords do not match')
-            return redirect('register')
+            return redirect('/register')
 
         # Check if the username is already taken
         if User.objects.filter(username=varUsername).exists():
             messages.error(request, 'Username is already taken')
-            return redirect('register')
+            return redirect('/register')
 
         # Check if the email is already registered
         if User.objects.filter(email=varEmail).exists():
             messages.error(request, 'Email is already registered')
-            return redirect('register')
+            return redirect('/register')
 
         # Create a new user account
         user = User.objects.create_user(
@@ -81,11 +82,15 @@ def register(request):
             password=varPassword
         )
         messages.success(request, 'Account created successfully! You can now login.')
-        return redirect('register')
+        return redirect('/register')
 
     return render(request, 'mainTemplates/pages/register.html')
 
+def custom_logout_view(request):
+    logout(request)
+    return redirect('/login')
 
+@login_required
 def landing(request):
     orgForm = landingForm()
     # return HttpResponse('Landing Page')
@@ -129,3 +134,87 @@ def apply(request):
     return render(request, 'mainTemplates/pages/apply.html')
 
 
+# from django.shortcuts import render, redirect
+# from django.contrib import messages
+# from django.contrib.auth.models import User
+# from django.contrib.auth import authenticate, login
+# from .models import organisations
+# from .form import LandingForm
+
+# def empty(request):
+#     return render(request, 'mainTemplates/pages/empty.html')
+
+# def custom_login_view(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+
+#         user = authenticate(request, email=email, password=password)
+
+#         if user is not None:
+#             login(request, user)
+#             return redirect("landing")
+#         else:
+#             messages.error(request, 'Invalid Credential!!')
+#             return redirect("login")
+
+#     return render(request, 'mainTemplates/pages/login.html')
+
+# def register(request):
+#     if request.method == 'POST':
+#         varUsername = request.POST.get('username')
+#         varEmail = request.POST.get('email')
+#         varPassword = request.POST.get('password')
+#         varConfirmPassword = request.POST.get('confirm_password')
+
+#         if varPassword != varConfirmPassword:
+#             messages.error(request, 'Passwords do not match')
+#             return redirect('register')
+
+#         if User.objects.filter(username=varUsername).exists():
+#             messages.error(request, 'Username is already taken')
+#             return redirect('register')
+
+#         if User.objects.filter(email=varEmail).exists():
+#             messages.error(request, 'Email is already registered')
+#             return redirect('register')
+
+#         user = User.objects.create_user(
+#             username=varUsername,
+#             email=varEmail,
+#             password=varPassword
+#         )
+#         messages.success(request, 'Account created successfully! You can now login.')
+#         return redirect('login')
+
+#     return render(request, 'mainTemplates/pages/register.html')
+
+# def landing(request):
+#     orgForm = LandingForm()
+#     organisationsTableData = organisations.objects.all()
+
+#     if request.method == 'POST':
+#         landing_form = LandingForm(request.POST)
+#         if landing_form.is_valid():
+#             landing_form.save()
+#             return redirect('landing')
+#         else:
+#             messages.error(request, 'Invalid Form Data!')
+    
+#     context = {
+#         'orgForm': orgForm,
+#         'organisationsTableData': organisationsTableData,
+#     }
+
+#     return render(request, 'mainTemplates/pages/landing.html', context)
+
+# def apply(request):
+#     if request.method == 'POST':
+#         landing_form = LandingForm(request.POST)
+#         if landing_form.is_valid():
+#             landing_form.save()
+#             return redirect('landing')
+#         else:
+#             messages.error(request, 'Invalid Form Data!')
+
+#     return render(request, 'mainTemplates/pages/apply.html')

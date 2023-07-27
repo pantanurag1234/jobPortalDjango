@@ -8,9 +8,12 @@
 
 {% endblock %}
 
+{%block logout%}
+    {% comment %} <button href="/login" class="btn btn-outline-success" style="font-weight: bold;">Logout</button> {% endcomment %}
+    <a href="{% url 'JobPortalDjango:logout' %}" class="btn btn-outline-success" style="font-weight: bold;">Logout</a>
+{%endblock%}
 
 {% block content %}
-
 <!-- <center> -->
 <form name="landing" method="POST" action="/landing/" class="formCSS">
     {% csrf_token %}
@@ -49,28 +52,30 @@
 </form>
 <!-- </center> -->
 
-<table class="table table-dark table-hover landingTable landing-table">
-    <thead>
-        <tr>
-            <th scope="col">Token</th>
-            <th scope="col">OrgName</th>
-            <th scope="col">Position</th>
-            <th scope="col">Package(in LPA)</th>
-            <th scope="col">Experience(in Yrs)</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        {% for org in organisationsTableData %}
-        <tr>
-            <th scope="row">{{ org.id }}</th>
-            <td>{{ org.name }}</td>
-            <td>{{ org.position }}</td>
-            <td>{{ org.package_in_LPA }}</td>
-            <td>{{ org.experience_in_yrs }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-container" style="height: 300px; overflow-y: scroll;">
+    <table class="table table-dark table-hover landingTable landing-table">
+        <thead>
+            <tr>
+                <th scope="col">Token</th>
+                <th scope="col">OrgName</th>
+                <th scope="col">Position</th>
+                <th scope="col">Package(in LPA)</th>
+                <th scope="col">Experience(in Yrs)</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for org in organisationsTableData %}
+            <tr>
+                <th scope="row">{{ org.id }}</th>
+                <td>{{ org.name }}</td>
+                <td>{{ org.position }}</td>
+                <td>{{ org.package_in_LPA }}</td>
+                <td>{{ org.experience_in_yrs }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<div>
 
 <!-- {{ organisationsTableData }} -->
 <!-- <ul>

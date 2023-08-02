@@ -27,7 +27,10 @@ SECRET_KEY = 'django-insecure-nbm+w(67&t1icc&6uyrvhijt=uxgvh5f%i0vh^iwdnv5y5e7+c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+
+ALLOWED_HOSTS = ["127.0.0.1"]
+
+
 
 
 # Application definition
@@ -84,11 +87,19 @@ WSGI_APPLICATION = 'JobPortalDjango.wsgi.application'
 # }
 
 DATABASES = {
+#     'default': {
+#     'ENGINE':'django.db.backends.mysql',
+#     'NAME':'apdb1',
+#     'USER':'root',
+#     'PASSWORD':'Main@007',
+#     'HOST':'localhost',
+#     'PORT':'3306'
+#     }
     'default': {
     'ENGINE':'django.db.backends.mysql',
-    'NAME':'apdb1',
-    'USER':'root',
-    'PASSWORD':'Main@007',
+    'NAME':'apdb01',
+    'USER':'devops-prac',
+    'PASSWORD':'qwertyuiop@123ABC',
     'HOST':'localhost',
     'PORT':'3306'
     }

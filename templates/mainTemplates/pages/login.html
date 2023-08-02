@@ -18,17 +18,23 @@
       </div>
     {% endfor %}
   {% endif %}
-<form name="login" method="POST" action="/login/" class="formCSS">
+<form name="login" method="POST" action="{% url 'JobPortalDjango:custom_login_view'%}" class="formCSS">
   {% csrf_token %}
   <h1>Login Now!</h1>
-    <div class="mb-3">
+    {% comment %} <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 36%">
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 36%" name="email">
       <div id="emailHelp" class="form-text" style="color:black;">We'll never share your email with anyone else.</div>
+    </div> {% endcomment %}
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" style="width: 36%" name="username">
     </div>
+
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" style="width: 36%">
+      <input type="password" class="form-control" id="exampleInputPassword1" style="width: 36%" name="password">
     </div>
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
